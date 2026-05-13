@@ -3,7 +3,4 @@ pandas
 openpyxl
 folium
 streamlit-folium
-geopandas==0.14.4
-shapely==2.0.4
-pyproj==3.6.1
-fiona==1.9.6
+geopandas
