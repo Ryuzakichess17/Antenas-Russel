@@ -145,10 +145,27 @@ resumen_antenas["Estado"] = (
 )
 
 # =========================
+# FILTRO ACCIÓN
+# =========================
+acciones = sorted(
+    antenas["Acción"]
+    .dropna()
+    .unique()
+)
+
+accion_seleccionada = st.selectbox(
+    "Acción",
+    acciones
+)
+
+# =========================
 # FILTRO DEPARTAMENTO
 # =========================
 departamentos = sorted(
-    antenas["Departamento"]
+    antenas.loc[
+        antenas["Acción"] == accion_seleccionada,
+        "Departamento"
+    ]
     .dropna()
     .unique()
 )
@@ -158,8 +175,12 @@ depto_seleccionado = st.selectbox(
     departamentos
 )
 
+# =========================
+# FILTRO FINAL
+# =========================
 antenas_filtradas = antenas[
-    antenas["Departamento"] == depto_seleccionado
+    (antenas["Acción"] == accion_seleccionada) &
+    (antenas["Departamento"] == depto_seleccionado)
 ]
 
 # =========================
